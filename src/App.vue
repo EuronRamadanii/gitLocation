@@ -51,7 +51,7 @@ export default {
   
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import { getGeo } from 'geoplugin';
+// import { getGeo } from 'geoplugin';
 
 
 export default {
@@ -69,15 +69,15 @@ export default {
   created() {
     this.findMyIp();
     // this.fetchDataWithIp();
-    this.test()
+    // this.test()
   },
   methods: {
-    test() {
-      getGeo()
-        .then(response => console.log('rrrr', response)) // handle success
-        .catch(error => console.log(error)) // handle error
-        .then(() => { }); // always executed
-    },
+    // test() {
+    //   getGeo()
+    //     .then(response => console.log('rrrr', response)) // handle success
+    //     .catch(error => console.log(error)) // handle error
+    //     .then(() => { }); // always executed
+    // },
 
 
     // test() {
@@ -87,12 +87,36 @@ export default {
     //     });
     // },
     findMyIp() {
-      fetch('http://api.ipstack.com/check?access_key=' + this.myAccesKey)
-        .then(response => response.json())
-        .then(json => {
-          console.log('json', json)
-          this.myIp = json;
-        })
+
+      // var requestOptions = {
+      //   method: 'GET',
+      // };
+      // fetch("https://api.geoapify.com/v1/geocode/search?text=aaa92ff4b5aa451ca2924e913fa0552f", requestOptions)
+      //   .then(response => response.json())
+      //   .then(result => console.log(result))
+      //   .catch(error => console.log('error', error));
+
+      fetch('https://api.geoapify.com/v1/ipinfo?apiKey=aaa92ff4b5aa451ca2924e913fa0552f', {
+        method: 'GET'
+      })
+        .then(function (response) { return response.json(); })
+        .then(function () {
+          // use the json
+        });
+
+      // fetch('http://api.ipstack.com/check?access_key=' + this.myAccesKey)
+      //   .then(response => response.json())
+      //   .then(json => {
+      //     console.log('json', json)
+      //     this.myIp = json;
+      //   })
+
+
+
+
+
+
+
       // fetch('https://api.bigdatacloud.net/data/country-by-ip?ip=80.80.162.102&localityLanguage=en&key' + this.myAccesKey)
       //   .then(response => response.json())
       //   .then(json => {
