@@ -36,19 +36,22 @@ export default {
 </style> -->
 <template>
   <div>
-    <h3>Ip Information </h3>
+    <!-- <h3>Ip Information </h3>
     <p> Ip : {{ myIp.ip }} </p>
     <p> City : {{ myIp.region_name }} </p>
     <p> City licence plates: {{ myIp.region_code }} </p>
     <p> Ip Type : {{ myIp.type }} </p>
     <p> Country : {{ myIp.country_name }} </p>
-    <p> Zıp Code : {{ myIp.zip }} </p>
+    <p> Zıp Code : {{ myIp.zip }} </p> -->
+
+    
     <!-- <p> <img v-if="myIp.location" :src="myIp.location.country_flag" /></p> -->
   </div>
 </template>
   
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'App',
@@ -58,7 +61,8 @@ export default {
   data() {
     return {
       myIp: {},
-      myAccesKey: '4f01e401ff025bf0b09342388bb26782'
+      // myAccesKey: '4f01e401ff025bf0b09342388bb26782'
+      myAccesKey: 'bdc_1bf0c7dbf570468db43ecee7c8acf191	'
     }
   },
   created() {
@@ -67,7 +71,19 @@ export default {
   },
   methods: {
     findMyIp() {
-      fetch('http://api.ipstack.com/check?access_key=' + this.myAccesKey)
+      // fetch('http://api.ipstack.com/check?access_key=' + this.myAccesKey)
+      //   .then(response => response.json())
+      //   .then(json => {
+      //     console.log('json', json)
+      //     this.myIp = json;
+      //   })
+      // fetch('https://api.bigdatacloud.net/data/country-by-ip?ip=80.80.162.102&localityLanguage=en&key' + this.myAccesKey)
+      //   .then(response => response.json())
+      //   .then(json => {
+      //     console.log('json', json)
+      //     this.myIp = json;
+      //   })
+      fetch(`https://api.ip2location.com/v2/?ip=80.80.162.102&key={YOUR_API_KEY}&package=WS25`)
         .then(response => response.json())
         .then(json => {
           console.log('json', json)
