@@ -44,13 +44,14 @@ export default {
     <p> Country : {{ myIp.country_name }} </p>
     <p> Zıp Code : {{ myIp.zip }} </p> -->
 
-    
+
     <!-- <p> <img v-if="myIp.location" :src="myIp.location.country_flag" /></p> -->
   </div>
 </template>
   
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import { getGeo } from 'geoplugin';
 
 
 export default {
@@ -68,8 +69,23 @@ export default {
   created() {
     this.findMyIp();
     // this.fetchDataWithIp();
+    this.test()
   },
   methods: {
+    test() {
+      getGeo()
+        .then(response => console.log('rrrr', response)) // handle success
+        .catch(error => console.log(error)) // handle error
+        .then(() => { }); // always executed
+    },
+
+
+    // test() {
+    //   this.$getLocation()
+    //     .then(coordinates => {
+    //       console.log(coordinates);
+    //     });
+    // },
     findMyIp() {
       // fetch('http://api.ipstack.com/check?access_key=' + this.myAccesKey)
       //   .then(response => response.json())
@@ -83,12 +99,12 @@ export default {
       //     console.log('json', json)
       //     this.myIp = json;
       //   })
-      fetch(`https://api.ip2location.com/v2/?ip=80.80.162.102&key={YOUR_API_KEY}&package=WS25`)
-        .then(response => response.json())
-        .then(json => {
-          console.log('json', json)
-          this.myIp = json;
-        })
+      // fetch(`https://api.ip2location.com/v2/?ip=80.80.162.102&key={YOUR_API_KEY}&package=WS25`)
+      //   .then(response => response.json())
+      //   .then(json => {
+      //     console.log('json', json)
+      //     this.myIp = json;
+      //   })
     },
     // fetchDataWithIp() {
 
