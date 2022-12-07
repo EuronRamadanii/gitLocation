@@ -37,12 +37,18 @@ export default {
 <template>
   <div>
     <h3>Ip Information </h3>
-    <p> Ip : {{ myIp.ip }} </p>
-    <p> City : {{ myIp.region_name }} </p>
-    <p> City licence plates: {{ myIp.region_code }} </p>
+    <p> Capital : {{ myIp.country.capital }} </p>
+    <p> Iso Code : {{ myIp.country.iso_code }} </p>
+    <!-- <p> City licence plates: {{ myIp.region_code }} </p>
     <p> Ip Type : {{ myIp.type }} </p>
     <p> Country : {{ myIp.country_name }} </p>
-    <p> Zıp Code : {{ myIp.zip }} </p>
+    <p> Zıp Code : {{ myIp.zip }} </p> -->
+    <input type="button" name="test" v-if="myIp.country.iso_code == 'XK'" value="Kosovo"
+      href="https://www.woodsama.com/" placeholder="WoodSama" />
+    <input v-else-if="myIp.country.iso_code == 'AT'" type="text" href="https://www.digitbusiness.ch/" value="Austri" />
+    <input v-else-if="myIp.country.iso_code == 'CH'" type="text" href="https://www.digitbusiness.ch/"
+      value="DigitBusiness" />
+    <input v-else type="text" href="https://www.digitbusiness.ch/" value="Zvicer" />
 
 
     <!-- <p> <img v-if="myIp.location" :src="myIp.location.country_flag" /></p> -->
@@ -99,10 +105,11 @@ export default {
       fetch('https://api.geoapify.com/v1/ipinfo?apiKey=aaa92ff4b5aa451ca2924e913fa0552f', {
         method: 'GET'
       })
-        .then(function (response) { return response.json(); })
-        .then(function () {
-          // use the json
-        });
+        .then(response => response.json())
+        .then(json => {
+          console.log('json', json)
+          this.myIp = json;
+        })
 
       // fetch('http://api.ipstack.com/check?access_key=' + this.myAccesKey)
       //   .then(response => response.json())
