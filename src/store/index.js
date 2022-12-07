@@ -1,17 +1,22 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+// import createPersistedState from "vuex-persistedstate";
 
-Vue.use(Vuex)
+// Modules
+
+import country from "./modules/country";
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  plugins: [
+    // createPersistedState({
+    //   paths: ["authentication"],
+    //   storage: window.localStorage,
+    // }),
+  ],
   modules: {
-  }
-})
+    country,
+  },
+  strict: process.env.DEV,
+});

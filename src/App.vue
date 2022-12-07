@@ -37,18 +37,19 @@ export default {
 <template>
   <div>
     <h3>Ip Information </h3>
-    <p> Capital : {{ myIp.country.capital }} </p>
-    <p> Iso Code : {{ myIp.country.iso_code }} </p>
+    <p> Capital : {{ getCountry.country.capital }} </p>
+    <p> Iso Code : {{ getCountry.country.iso_code }} </p>
     <!-- <p> City licence plates: {{ myIp.region_code }} </p>
     <p> Ip Type : {{ myIp.type }} </p>
     <p> Country : {{ myIp.country_name }} </p>
     <p> Zıp Code : {{ myIp.zip }} </p> -->
-    <input type="button" name="test" v-if="myIp.country.iso_code == 'XK'" value="Kosovo"
-      href="https://www.woodsama.com/" placeholder="WoodSama" />
-    <input v-else-if="myIp.country.iso_code == 'AT'" type="text" href="https://www.digitbusiness.ch/" value="Austri" />
-    <input v-else-if="myIp.country.iso_code == 'CH'" type="text" href="https://www.digitbusiness.ch/"
-      value="DigitBusiness" />
-    <input v-else type="text" href="https://www.digitbusiness.ch/" value="Zvicer" />
+    <input type="button" name="test" v-if="getCountry.country.iso_code == 'XK'" value="Kosovo"
+      href="https://www.woodsama.com/" />
+    <input v-else-if="getCountry.country.iso_code == 'AT'" type="text" href="https://www.digitbusiness.ch/"
+      value="Austri" />
+    <input v-else-if="getCountry.country.iso_code == 'CH'" type="text" href="https://www.digitbusiness.ch/"
+      value="Zvicer" />
+    <input v-else type="text" href="https://www.digitbusiness.ch/" value="Other Country" />
 
 
     <!-- <p> <img v-if="myIp.location" :src="myIp.location.country_flag" /></p> -->
@@ -56,8 +57,7 @@ export default {
 </template>
   
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import { getGeo } from 'geoplugin';
+import { mapGetters, mapActions } from 'vuex';
 
 
 export default {
@@ -68,84 +68,29 @@ export default {
   data() {
     return {
       myIp: {},
-      myAccesKey: '4f01e401ff025bf0b09342388bb26782'
-      // myAccesKey: 'bdc_1bf0c7dbf570468db43ecee7c8acf191	'
     }
   },
-  created() {
-    this.findMyIp();
-    // this.fetchDataWithIp();
-    // this.test()
+  mounted() {
+    this.getCountries();
+    console.log("tttt", this.test)
+  },
+  computed: {
+    ...mapGetters(['getCountry']),
+    // eslint-disable-next-line vue/return-in-computed-property
+    test() {
+      console.log('testtttt', this.getCountry)
+    },
   },
   methods: {
-    // test() {
-    //   getGeo()
-    //     .then(response => console.log('rrrr', response)) // handle success
-    //     .catch(error => console.log(error)) // handle error
-    //     .then(() => { }); // always executed
-    // },
-
-
-    // test() {
-    //   this.$getLocation()
-    //     .then(coordinates => {
-    //       console.log(coordinates);
-    //     });
-    // },
-    findMyIp() {
-
-      // var requestOptions = {
-      //   method: 'GET',
-      // };
-      // fetch("https://api.geoapify.com/v1/geocode/search?text=aaa92ff4b5aa451ca2924e913fa0552f", requestOptions)
-      //   .then(response => response.json())
-      //   .then(result => console.log(result))
-      //   .catch(error => console.log('error', error));
-
-      fetch('https://api.geoapify.com/v1/ipinfo?apiKey=aaa92ff4b5aa451ca2924e913fa0552f', {
-        method: 'GET'
-      })
-        .then(response => response.json())
-        .then(json => {
-          console.log('json', json)
-          this.myIp = json;
-        })
-
-      // fetch('http://api.ipstack.com/check?access_key=' + this.myAccesKey)
-      //   .then(response => response.json())
-      //   .then(json => {
-      //     console.log('json', json)
-      //     this.myIp = json;
-      //   })
-
-
-
-
-
-
-
-      // fetch('https://api.bigdatacloud.net/data/country-by-ip?ip=80.80.162.102&localityLanguage=en&key' + this.myAccesKey)
-      //   .then(response => response.json())
-      //   .then(json => {
-      //     console.log('json', json)
-      //     this.myIp = json;
-      //   })
-      // fetch(`https://api.ip2location.com/v2/?ip=80.80.162.102&key={YOUR_API_KEY}&package=WS25`)
-      //   .then(response => response.json())
-      //   .then(json => {
-      //     console.log('json', json)
-      //     this.myIp = json;
-      //   })
-    },
-    // fetchDataWithIp() {
-
-    //   fetch('http://api.ipstack.com/134.201.250.155?access_key=' + this.myAccesKey)
-    //     .then(response => response.json())
-    //     .then(json => {
-    //       console.log('test', json)
-    //       //this.myIp=json;
-    //     })
-    // }
+    ...mapActions(['getCountries']),
+    // fetch('https://api.geoapify.com/v1/ipinfo?apiKey=aaa92ff4b5aa451ca2924e913fa0552f', {
+    //   method: 'GET'
+    // })
+    //   .then(response => response.json())
+    //   .then(json => {
+    //     console.log('json', json)
+    //     this.myIp = json;
+    //   })
   }
 }
 </script>
