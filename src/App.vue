@@ -71,14 +71,17 @@ export default {
     }
   },
   created() {
-    console.log('rrr', this.getCountry.country.capital)
+    // console.log('rrr', this.userName)
   },
   mounted() {
     this.getCountries();
-    console.log('rrr', this.getCountry.country.capital)
+    console.log('rrr', this.userName)
   },
   computed: {
     ...mapGetters(['getCountry']),
+    userName() {
+      return this.$store.state.state.country.ip;
+    }
   },
   methods: {
     ...mapActions(['getCountries']),
