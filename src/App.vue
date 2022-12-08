@@ -70,27 +70,18 @@ export default {
       myIp: {},
     }
   },
+  created() {
+    console.log('rrr', this.getCountry.country.capital)
+  },
   mounted() {
     this.getCountries();
-    console.log("tttt", this.test)
+    console.log('rrr', this.getCountry.country.capital)
   },
   computed: {
     ...mapGetters(['getCountry']),
-    // eslint-disable-next-line vue/return-in-computed-property
-    test() {
-      console.log('testtttt', this.getCountry)
-    },
   },
   methods: {
     ...mapActions(['getCountries']),
-    // fetch('https://api.geoapify.com/v1/ipinfo?apiKey=aaa92ff4b5aa451ca2924e913fa0552f', {
-    //   method: 'GET'
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     console.log('json', json)
-    //     this.myIp = json;
-    //   })
   }
 }
 </script>
